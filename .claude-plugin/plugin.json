@@ -1,0 +1,16 @@
+{
+  "name": "haiku",
+  "description": "軽量モデル (Haiku) にブラインドで資料を読ませ、理解の再現から分かりやすさを検証する読解チェック。日本語資料用の haiku:yomu と英語資料用の haiku:retell の 2 スキルを同梱",
+  "author": {
+    "name": "simiraaaa"
+  },
+  "repository": "https://github.com/simiraaaa/haiku-yomu",
+  "license": "MIT",
+  "keywords": [
+    "review",
+    "readability",
+    "documentation",
+    "haiku",
+    "skill"
+  ]
+}

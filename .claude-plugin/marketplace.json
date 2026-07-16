@@ -1,0 +1,14 @@
+{
+  "name": "haiku-yomu",
+  "description": "軽量モデル (Haiku) のブラインド読解で資料の分かりやすさを検証するスキル (日本語資料用 haiku:yomu / 英語資料用 haiku:retell) の配布マーケットプレイス",
+  "owner": {
+    "name": "simiraaaa"
+  },
+  "plugins": [
+    {
+      "name": "haiku",
+      "source": "./",
+      "description": "資料が「深く考えなくても理解できる」かを、軽量モデル (Haiku) にブラインドで読ませて検証する読解チェック (日本語: haiku:yomu / English: haiku:retell)"
+    }
+  ]
+}
