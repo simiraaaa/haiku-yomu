@@ -32,6 +32,20 @@ Claude Code のセッションで、以下を **1 つずつ順に**実行する 
 
 これで日本語資料用の `haiku:yomu` と英語資料用の `haiku:retell` の両方が入る。
 
+### Codex CLI で使う
+
+同じリポジトリが Codex CLI のプラグインとしても機能する。ターミナルで以下を 1 つずつ実行する:
+
+```
+codex plugin marketplace add simiraaaa/haiku-yomu
+```
+
+```
+codex plugin add haiku@haiku-yomu
+```
+
+スキル名は Claude Code と同じ (`haiku:yomu` / `haiku:retell`)。検査エンジンは Codex から起動される Haiku (`claude` CLI が必要な点は同じ)。
+
 ## 使い方
 
 Claude Code のセッションで:
@@ -91,6 +105,7 @@ Haiku に「分かりにくい箇所を指摘して」と直接頼むと、「�
 | `skills/retell/` | 英語資料用スキル `haiku:retell` (SKILL.md + haiku-read.sh の英語版) |
 | `.claude-plugin/plugin.json` | プラグイン定義 (plugin 名 `haiku`) |
 | `.claude-plugin/marketplace.json` | 配布用マーケットプレイス定義 (marketplace 名 `haiku-yomu`) |
+| `.codex-plugin/plugin.json` / `.agents/plugins/marketplace.json` | Codex CLI 用のプラグイン・マーケットプレイス定義 (スキルは共有) |
 | `LICENSE` | MIT |
 
 ## License

@@ -32,6 +32,20 @@ In a Claude Code session, run these **one at a time, in order** (pasting them to
 
 This installs both `haiku:retell` (for English documents) and `haiku:yomu` (for Japanese documents).
 
+### Using with Codex CLI
+
+The same repository also works as a Codex CLI plugin. Run these in a terminal, one at a time:
+
+```
+codex plugin marketplace add simiraaaa/haiku-yomu
+```
+
+```
+codex plugin add haiku@haiku-yomu
+```
+
+The skill names are the same as in Claude Code (`haiku:yomu` / `haiku:retell`). The reading engine is still Haiku launched via the `claude` CLI, so that requirement stays the same.
+
 ## Usage
 
 In a Claude Code session:
@@ -91,6 +105,7 @@ A pass shows only that "**given the stated premise, Haiku could retell the key p
 | `.claude-plugin/plugin.json` | Plugin definition (plugin name `haiku`) |
 | `skills/yomu/` | Japanese version of the skill (`haiku:yomu`) |
 | `.claude-plugin/marketplace.json` | Marketplace definition for distribution (marketplace name `haiku-yomu`) |
+| `.codex-plugin/plugin.json` / `.agents/plugins/marketplace.json` | Plugin & marketplace definitions for Codex CLI (skills are shared) |
 | `LICENSE` | MIT |
 
 ## License

@@ -1,0 +1,15 @@
+{
+  "name": "haiku-yomu",
+  "interface": {
+    "displayName": "haiku-yomu"
+  },
+  "plugins": [
+    {
+      "name": "haiku",
+      "source": {
+        "source": "local",
+        "path": "./"
+      }
+    }
+  ]
+}
