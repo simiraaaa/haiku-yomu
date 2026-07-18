@@ -4,7 +4,7 @@
 
 [日本語版 (Japanese)](./README.md)
 
-A Claude Code skill (plugin) that has Haiku read your document and verifies it can be understood **without deep thinking**.
+A Claude Code / Codex CLI skill (plugin) that has Haiku read your document and verifies it can be understood **without deep thinking**. Either way, the `claude` CLI is required — it is what runs the Haiku reader.
 
 By deliberately giving the document to a reader with limited reasoning, it avoids the problem that "a reader capable of deep inference fills the gaps", and measures how clear the document is on its own. (*詠む (= yomu)* is Japanese for "to read / to compose a poem".)
 
