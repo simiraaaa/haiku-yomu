@@ -85,7 +85,7 @@ Misreadings are **treated as the document's problem** by default.
 
 - **Explanatory text**: READMEs, design docs, runbooks, skill definitions, PR descriptions
 - Anything meant to make a reader understand something — not just manuals (tech blogs, shared notes)
-- Multiple documents can be inspected in parallel (see SKILL.md)
+- Multiple documents can be inspected in parallel; for important documents, run the same document multiple times and cross-check the runs (see SKILL.md)
 - **Pick the skill that matches the document's language**: English documents → `haiku:retell` (report in English); Japanese documents → `haiku:yomu` (report in Japanese). It still works across languages, but the report may come back coarser
 
 ## What it cannot detect
