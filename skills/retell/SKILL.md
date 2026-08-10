@@ -128,7 +128,7 @@ Compare Haiku's output with the Step 1 intent. **Gaps in the retelling (question
 
 - **Retelling (questions 1–2)**: gaps count as document-side defects **even when they appear in only one run** (never discard them). The overall verdict is a pass **only when every run reproduces the key points and post-reading actions** — if some runs break, do not pass the document; report that run's gaps as usual.
 - **Self-reports (question 3)**: cross-check across runs before the item-by-item judgment below.
-  - **Prioritize reports that recur in more than half of the runs (e.g. 2 or more of 3 runs)**.
+  - **Prioritize reports that recur in more than half of the runs (e.g. 2 or more of 3 runs, 3 or more of 5 runs)**.
   - Whether two reports are the same is judged by whether the quoted passage and the cause of the confusion match (differences in wording count as the same report).
   - A report that appears in only one run is not noise but a **weak signal** (its priority drops, yet if its content is a real hole in the document, pick it up).
 - **Cross-round promotion of self-reports**: when the same report appears in **two consecutive verification rounds** (one round = one pass through Steps 2–4, with multiple runs together forming one round; the initial inspection counts as a round — appearing in the initial inspection and again in the first re-verification (Step 5) is enough), promote it to recurring even if it is single-run within each round (true noise moves to a different place each round).
