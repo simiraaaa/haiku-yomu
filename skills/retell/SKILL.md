@@ -65,9 +65,12 @@ wait "$pid_a"; echo "a: exit=$?"
 wait "$pid_b"; echo "b: exit=$?"   # confirm all are 0 before reading the files
 
 # For multiple runs of the same document, key the output files by run number (reusing the document-name key overwrites reports)
-pids=()
-for i in 1 2 3; do "$skills_dir/haiku-read.sh" doc.md "<premise>" > "/tmp/haiku-run-$i.txt" 2>&1 & pids+=($!); done
-for i in "${!pids[@]}"; do wait "${pids[$i]}"; echo "run $((i+1)): exit=$?"; done   # confirm all are 0
+"$skills_dir/haiku-read.sh" doc.md "<premise>" > /tmp/haiku-run-1.txt 2>&1 & p1=$!
+"$skills_dir/haiku-read.sh" doc.md "<premise>" > /tmp/haiku-run-2.txt 2>&1 & p2=$!
+"$skills_dir/haiku-read.sh" doc.md "<premise>" > /tmp/haiku-run-3.txt 2>&1 & p3=$!
+wait "$p1"; echo "run 1: exit=$?"
+wait "$p2"; echo "run 2: exit=$?"
+wait "$p3"; echo "run 3: exit=$?"   # confirm all are 0
 ```
 
 Write the Step 1 intent (premise and answer key) **for every document up front**, and do the Step 3 comparison per document after all results are in (a single combined report is fine). **For important documents (deliverables, widely read material, anything costly to fix later), you may run the same document as multiple runs (one inspection = one run) in parallel** (a fluctuation countermeasure). Prefer an odd run count of 3 or 5 (with an even count, a report recurring in exactly half the runs misses Step 3's "more than half"). Write each run's output to its own file. Up to 8 parallel runs is fine by measurement (an observed range, not a cap — in the author's environment all runs finished normally, each batch in just under 2 minutes, with no rate limiting); when documents × runs exceeds 8, split the launches into batches of 8 runs (beyond 8 is simply unmeasured, not known to fail). How to cross-check runs and decide the verdict is in Step 3, "When you ran multiple runs". Note: even when you run all files in parallel, each inspection sees only its own document — **all documents passing does not mean the documents are consistent with each other** (as stated under "Out of scope"; cross-file consistency belongs to cross-cutting reviews).

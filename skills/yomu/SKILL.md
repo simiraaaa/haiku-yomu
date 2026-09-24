@@ -65,9 +65,12 @@ wait "$pid_a"; echo "a: exit=$?"
 wait "$pid_b"; echo "b: exit=$?"   # 全部 0 を確認してから各ファイルを読む
 
 # 同一資料を複数 run 流すときは run 番号で出力を分ける (資料名キーの流用は上書き事故のもと)
-pids=()
-for i in 1 2 3; do "$skills_dir/haiku-read.sh" doc.md "<前提>" > "/tmp/haiku-run-$i.txt" 2>&1 & pids+=($!); done
-for i in "${!pids[@]}"; do wait "${pids[$i]}"; echo "run $((i+1)): exit=$?"; done   # 全部 0 を確認
+"$skills_dir/haiku-read.sh" doc.md "<前提>" > /tmp/haiku-run-1.txt 2>&1 & p1=$!
+"$skills_dir/haiku-read.sh" doc.md "<前提>" > /tmp/haiku-run-2.txt 2>&1 & p2=$!
+"$skills_dir/haiku-read.sh" doc.md "<前提>" > /tmp/haiku-run-3.txt 2>&1 & p3=$!
+wait "$p1"; echo "run 1: exit=$?"
+wait "$p2"; echo "run 2: exit=$?"
+wait "$p3"; echo "run 3: exit=$?"   # 全部 0 を確認
 ```
 
 Step 1 の意図 (前提知識と正解) は**全資料ぶん先に書き**、Step 3 の突き合わせは全部の結果が揃ってから資料ごとに行う (報告は 1 回にまとめてよい)。**重要な資料 (配布物・読者が多い・修正コストが高いもの等) は、同一資料を複数 run (1 回の検査 = 1 run) 並列で流してよい** (揺れ対策)。run 数は奇数の 3 か 5 を推奨 (偶数はちょうど半数の反復が Step 3 の「過半」に届かない)。run ごとに出力を別ファイルへ分ける。並列は 8 run までは実測で問題なし (上限ではなく観測した範囲——作者環境で全 run 正常終了・各バッチ 2 分弱・レート制限なし)。資料数 × run 数がそれを超えるときは 8 run ずつに分けて流す。run 間の突き合わせ方と合否の決め方は Step 3「複数 run を流した場合」。注意: 並列で全ファイルを回しても、各検査は自分の資料しか見ない——**全資料が合格しても「資料間で整合している」ことにはならない** (Scope の「含まない」のとおり。ファイル間の整合は横断レビューの担当)。
