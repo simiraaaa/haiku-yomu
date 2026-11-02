@@ -101,7 +101,7 @@ trap 'exit 129' HUP; trap 'exit 130' INT; trap 'exit 143' TERM
 # $PROMPT に上記テンプレートを書き出す (<資料本文> に本文を埋め込む)
 # env -u CLAUDECODE はネスト実行と誤認させない防御。--no-session-persistence は
 # 検査した資料の本文をセッション履歴 (~/.claude/projects/) に残さないため
-env -u CLAUDECODE claude -p --model claude-haiku-4-5 --effort low \
+env -u CLAUDECODE claude -p --model haiku --effort low \
   --safe-mode --tools "" --no-session-persistence \
   < "$PROMPT"
 ```
@@ -110,7 +110,7 @@ env -u CLAUDECODE claude -p --model claude-haiku-4-5 --effort low \
 - プロンプトファイルは資料のリポジトリの外の一時ファイルに作り、絶対パスで参照する (作業ディレクトリを汚さない・カレントディレクトリに依存しない)。上のコードの `mktemp` は OS が用意する一時ディレクトリに空ファイルを作ってそのパスを返すコマンド。
 - **`--safe-mode --tools ""` で隔離する**。`--safe-mode` が CLAUDE.md・memory・MCP・plugins 等のカスタマイズを、`--tools ""` が組み込みツールを無効化する。`--disallowedTools` の列挙式は使わない——未列挙ツールと自動ロードされる文脈が残り、資料外の情報が読解に混入する。
 - **プロンプトは必ず stdin で渡す**。引数渡し (`claude -p ... "$(cat "$PROMPT")"`) は使えない——`--tools` / `--disallowedTools` は可変長引数のため、後続のプロンプト引数までツール名として飲み込んで壊れる。
-- モデルは `claude-haiku-4-5` (日付なしのエイリアス。Haiku 4.5 系の最新に自動追従する)、effort は **`low` 固定**。「深く考えない読者」を再現するのが目的なので、上げてはいけない (Purpose 参照)。`haiku-read.sh` の `HAIKU_REVIEW_MODEL` はモデル ID の変更に追従するための上書き手段で、**Haiku 系以外はスクリプトが弾く** (effort の上書き手段はない)。
+- モデルは `haiku` (最新の Haiku を指すエイリアス)、effort は **`low` 固定**。「深く考えない読者」を再現するのが目的なので、上げてはいけない (Purpose 参照)。`haiku-read.sh` の `HAIKU_REVIEW_MODEL` はモデル ID の変更に追従するための上書き手段で、**Haiku 系以外はスクリプトが弾く** (effort の上書き手段はない)。
 - Haiku ＋ ツールなしなら通常 1 分未満で返る (1 run 時の観測)。1 資料 1 run なら同期実行でよい (複数資料・同一資料の複数 run は冒頭のとおり並列起動)。
 
 **Expected result:** 設問 1〜3 に答えた読解レポートが返る。

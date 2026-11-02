@@ -19,7 +19,7 @@ PREMISE="${2:-}"
 [ -f "$DOC" ] || { echo "ERROR: document file not found: $DOC" >&2; exit 1; }
 command -v claude >/dev/null 2>&1 || { echo "ERROR: claude CLI not found." >&2; exit 127; }
 
-MODEL="${HAIKU_REVIEW_MODEL:-claude-haiku-4-5}"
+MODEL="${HAIKU_REVIEW_MODEL:-haiku}"
 case "$MODEL" in
   *haiku*) ;;
   *) echo "ERROR: HAIKU_REVIEW_MODEL accepts Haiku-family models only (got: $MODEL). A higher model is no longer a valid inspection (see Red Flags in SKILL.md)." >&2; exit 1 ;;
