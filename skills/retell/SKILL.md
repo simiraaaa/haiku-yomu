@@ -101,7 +101,7 @@ trap 'exit 129' HUP; trap 'exit 130' INT; trap 'exit 143' TERM
 # Write the template above into $PROMPT (embed the document body into <document body>)
 # env -u CLAUDECODE guards against being mistaken for a nested session. --no-session-persistence
 # keeps the inspected document body out of the session history (~/.claude/projects/)
-env -u CLAUDECODE claude -p --model claude-haiku-4-5 --effort low \
+env -u CLAUDECODE claude -p --model haiku --effort low \
   --safe-mode --tools "" --no-session-persistence \
   < "$PROMPT"
 ```
@@ -110,7 +110,7 @@ env -u CLAUDECODE claude -p --model claude-haiku-4-5 --effort low \
 - Create the prompt file as a temporary file outside the document's repository and reference it by absolute path (do not pollute the working directory; do not depend on the current directory). The `mktemp` in the code above is a command that creates an empty file in the OS temp directory and returns its path.
 - **Isolate with `--safe-mode --tools ""`**. `--safe-mode` disables customization (CLAUDE.md, memory, MCP, plugins, etc.); `--tools ""` disables the built-in tools. Do not use the enumerating `--disallowedTools` style — unlisted tools and auto-loaded context remain, and information from outside the document leaks into the reading.
 - **Always pass the prompt via stdin**. Argument passing (`claude -p ... "$(cat "$PROMPT")"`) does not work — `--tools` / `--disallowedTools` take variable-length arguments and swallow the following prompt argument as tool names, breaking the invocation.
-- The model is `claude-haiku-4-5` (a dateless alias that automatically tracks the latest Haiku 4.5 line); effort is **pinned to `low`**. The goal is to recreate "a reader who does not think deeply", so never raise it (see Purpose). `HAIKU_REVIEW_MODEL` in `haiku-read.sh` exists only to track model-ID changes; **the script rejects anything that is not a Haiku-family model** (there is no way to override effort).
+- The model is `haiku` (an alias that tracks the latest Haiku); effort is **pinned to `low`**. The goal is to recreate "a reader who does not think deeply", so never raise it (see Purpose). `HAIKU_REVIEW_MODEL` in `haiku-read.sh` exists only to track model-ID changes; **the script rejects anything that is not a Haiku-family model** (there is no way to override effort).
 - With Haiku and no tools, a run normally returns in under a minute (observed for a single run). Synchronous execution is fine for one document read as one run (for multiple documents, or multiple runs of the same document, launch in parallel as above).
 
 **Expected result:** a reading report answering questions 1–3.

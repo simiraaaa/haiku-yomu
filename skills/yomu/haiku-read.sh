@@ -19,7 +19,7 @@ PREMISE="${2:-}"
 [ -f "$DOC" ] || { echo "ERROR: 資料ファイルが見つかりません: $DOC" >&2; exit 1; }
 command -v claude >/dev/null 2>&1 || { echo "ERROR: claude CLI が見つかりません。" >&2; exit 127; }
 
-MODEL="${HAIKU_REVIEW_MODEL:-claude-haiku-4-5}"
+MODEL="${HAIKU_REVIEW_MODEL:-haiku}"
 case "$MODEL" in
   *haiku*) ;;
   *) echo "ERROR: HAIKU_REVIEW_MODEL は Haiku 系のみ指定できます (指定値: $MODEL)。上位モデルでは検査にならない (SKILL.md の Red Flags 参照)。" >&2; exit 1 ;;
